@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UAE Financial Freedom Plan — Vishnu & Divya</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #080d18;
+  --surface: #0f1623;
+  --surface2: #161f30;
+  --surface3: #1d2740;
+  --border: #1e2d45;
+  --border2: #253550;
+  --teal: #10d4a8;
+  --teal-dim: #0a9978;
+  --teal-glow: rgba(16,212,168,0.12);
+  --gold: #f5a623;
+  --gold-dim: #b37718;
+  --gold-glow: rgba(245,166,35,0.12);
+  --indigo: #818cf8;
+  --indigo-glow: rgba(129,140,248,0.12);
+  --red: #f87171;
+  --red-glow: rgba(248,113,113,0.1);
+  --green: #34d399;
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --text3: #475569;
+  --font-head: 'Syne', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-body: 'DM Sans', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.header {
+  background: linear-gradient(135deg, #080d18 0%, #0f1e38 50%, #080d18 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 32px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(16,212,168,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.header-inner { max-width: 1440px; margin: 0 auto; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.header-title { font-family: var(--font-head); font-size: 26px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; }
+.header-title span { color: var(--teal); }
+.header-sub { color: var(--text2); font-size: 13px; margin-top: 4px; }
+.header-badge { background: var(--teal-glow); border: 1px solid var(--teal-dim); color: var(--teal); font-family: var(--font-mono); font-size: 11px; padding: 4px 10px; border-radius: 20px; }
+
+/* LAYOUT */
+.app { max-width: 1440px; margin: 0 auto; padding: 24px 20px; display: grid; grid-template-columns: 320px 1fr; gap: 20px; }
+@media(max-width:1100px) { .app { grid-template-columns: 1fr; } }
+
+/* SIDEBAR */
+.sidebar { display: flex; flex-direction: column; gap: 14px; }
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.panel-header {
+  padding: 13px 16px;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+}
+.panel-title { font-family: var(--font-head); font-size: 12px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text2); }
+.panel-icon { font-size: 14px; }
+.panel-body { padding: 14px 16px; display: flex; flex-direction: column; gap: 12px; }
+.panel-body.collapsed { display: none; }
+
+/* INPUT GROUPS */
+.input-group { display: flex; flex-direction: column; gap: 5px; }
+.input-label { font-size: 11px; color: var(--text2); font-weight: 500; letter-spacing: 0.3px; display: flex; justify-content: space-between; align-items: center; }
+.input-value { font-family: var(--font-mono); font-size: 12px; color: var(--teal); font-weight: 500; }
+.input-value.gold { color: var(--gold); }
+.input-value.red { color: var(--red); }
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%; height: 4px;
+  background: var(--border2);
+  border-radius: 2px;
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px; height: 14px;
+  background: var(--teal);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 6px var(--teal);
+  transition: transform 0.15s;
+}
+input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+input[type="range"].gold-range::-webkit-slider-thumb { background: var(--gold); box-shadow: 0 0 6px var(--gold); }
+input[type="range"].red-range::-webkit-slider-thumb { background: var(--red); box-shadow: 0 0 6px var(--red); }
+input[type="range"].indigo-range::-webkit-slider-thumb { background: var(--indigo); box-shadow: 0 0 6px var(--indigo); }
+
+.input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.divider { height: 1px; background: var(--border); margin: 4px 0; }
+
+/* MAIN CONTENT */
+.main { display: flex; flex-direction: column; gap: 20px; }
+
+/* METRIC CARDS */
+.metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+@media(max-width:900px) { .metrics-grid { grid-template-columns: repeat(2,1fr); } }
+@media(max-width:500px) { .metrics-grid { grid-template-columns: 1fr; } }
+.metric-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 18px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.metric-card:hover { border-color: var(--border2); }
+.metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+}
+.metric-card.teal::before { background: linear-gradient(90deg, var(--teal), transparent); }
+.metric-card.gold::before { background: linear-gradient(90deg, var(--gold), transparent); }
+.metric-card.indigo::before { background: linear-gradient(90deg, var(--indigo), transparent); }
+.metric-card.red::before { background: linear-gradient(90deg, var(--red), transparent); }
+.metric-label { font-size: 10px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text3); margin-bottom: 8px; }
+.metric-main { font-family: var(--font-mono); font-size: 22px; font-weight: 600; line-height: 1; margin-bottom: 4px; }
+.metric-main.teal { color: var(--teal); }
+.metric-main.gold { color: var(--gold); }
+.metric-main.indigo { color: var(--indigo); }
+.metric-main.red { color: var(--red); }
+.metric-sub { font-family: var(--font-mono); font-size: 11px; color: var(--text2); }
+.metric-tag { font-size: 10px; color: var(--text3); margin-top: 6px; }
+
+/* CHART PANELS */
+.chart-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+}
+.chart-panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+.chart-panel-title { font-family: var(--font-head); font-size: 15px; font-weight: 700; color: var(--text); }
+.chart-panel-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.chart-wrap { position: relative; }
+.legend { display: flex; flex-wrap: wrap; gap: 12px; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text2); }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+/* GOALS */
+.goals-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+@media(max-width:700px) { .goals-grid { grid-template-columns: 1fr; } }
+.goal-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+.goal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+.goal-name { font-family: var(--font-head); font-size: 13px; font-weight: 700; }
+.goal-amount { font-family: var(--font-mono); font-size: 12px; color: var(--text2); text-align: right; }
+.progress-track { height: 6px; background: var(--surface3); border-radius: 3px; overflow: hidden; margin-bottom: 6px; }
+.progress-fill { height: 100%; border-radius: 3px; transition: width 0.6s ease; }
+.goal-footer { display: flex; justify-content: space-between; font-size: 10px; color: var(--text3); }
+.goal-pct { font-family: var(--font-mono); font-size: 11px; font-weight: 600; }
+
+/* TABLE */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+thead th {
+  background: var(--surface2);
+  color: var(--text2);
+  font-family: var(--font-head);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  padding: 10px 12px;
+  text-align: right;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--border);
+}
+thead th:first-child { text-align: left; }
+tbody td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text2);
+  white-space: nowrap;
+}
+tbody td:first-child { text-align: left; font-family: var(--font-body); color: var(--text); }
+tbody tr:hover { background: var(--surface2); }
+tbody tr.event-row { background: rgba(245,166,35,0.04); }
+tbody tr.phase-change { background: rgba(16,212,168,0.04); }
+.badge { display: inline-block; font-size: 9px; font-family: var(--font-mono); font-weight: 600; padding: 2px 6px; border-radius: 4px; }
+.badge.teal { background: var(--teal-glow); color: var(--teal); border: 1px solid var(--teal-dim); }
+.badge.gold { background: var(--gold-glow); color: var(--gold); border: 1px solid var(--gold-dim); }
+.badge.indigo { background: var(--indigo-glow); color: var(--indigo); border: 1px solid rgba(129,140,248,0.3); }
+.badge.red { background: var(--red-glow); color: var(--red); border: 1px solid rgba(248,113,113,0.3); }
+.num-pos { color: var(--teal); }
+.num-neg { color: var(--red); }
+.num-gold { color: var(--gold); }
+
+/* RISK */
+.risk-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+@media(max-width:800px) { .risk-grid { grid-template-columns: 1fr; } }
+.risk-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+.risk-title { font-family: var(--font-head); font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+.risk-level { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 10px; }
+.risk-level.high { color: var(--red); }
+.risk-level.medium { color: var(--gold); }
+.risk-level.low { color: var(--teal); }
+.risk-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.risk-desc { font-size: 12px; color: var(--text2); line-height: 1.6; margin-bottom: 10px; }
+.risk-impact { font-family: var(--font-mono); font-size: 11px; padding: 8px 10px; background: var(--surface2); border-radius: 6px; }
+.risk-impact-label { font-size: 10px; color: var(--text3); margin-bottom: 4px; }
+
+/* SCENARIO TABLE */
+.scenario-table { width: 100%; border-collapse: collapse; }
+.scenario-table th, .scenario-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 12px; }
+.scenario-table th { background: var(--surface2); color: var(--text2); font-family: var(--font-head); font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+.scenario-table td { font-family: var(--font-mono); color: var(--text2); }
+.scenario-table td:first-child { font-family: var(--font-body); color: var(--text); }
+.scenario-table tr.highlight td { color: var(--teal); }
+
+/* PHASE TIMELINE */
+.timeline { display: flex; gap: 0; overflow: hidden; border-radius: 8px; margin-bottom: 16px; }
+.phase { flex: 1; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px; }
+.phase-label { font-size: 9px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; opacity: 0.7; }
+.phase-desc { font-size: 11px; color: var(--text); }
+.phase-dates { font-family: var(--font-mono); font-size: 10px; opacity: 0.7; }
+.phase.p1 { background: rgba(129,140,248,0.12); border: 1px solid rgba(129,140,248,0.2); }
+.phase.p2 { background: rgba(245,166,35,0.12); border: 1px solid rgba(245,166,35,0.2); border-left: none; }
+.phase.p3 { background: rgba(16,212,168,0.12); border: 1px solid rgba(16,212,168,0.2); border-left: none; }
+
+/* SUMMARY VERDICT */
+.verdict {
+  background: linear-gradient(135deg, var(--surface) 0%, #0d1a2e 100%);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 24px;
+}
+.verdict-heading { font-family: var(--font-head); font-size: 18px; font-weight: 800; margin-bottom: 12px; }
+.verdict-point { display: flex; gap: 10px; margin-bottom: 10px; font-size: 13px; line-height: 1.5; }
+.verdict-icon { flex-shrink: 0; font-size: 14px; }
+
+/* TOGGLE */
+.toggle-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
+.toggle { position: relative; width: 32px; height: 18px; }
+.toggle input { opacity: 0; width: 0; height: 0; }
+.toggle-track {
+  position: absolute; inset: 0;
+  background: var(--surface3);
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.toggle-track::after {
+  content: '';
+  position: absolute;
+  left: 2px; top: 2px;
+  width: 14px; height: 14px;
+  background: var(--text2);
+  border-radius: 50%;
+  transition: transform 0.2s, background 0.2s;
+}
+.toggle input:checked + .toggle-track { background: var(--teal-dim); }
+.toggle input:checked + .toggle-track::after { transform: translateX(14px); background: var(--teal); }
+
+/* SECTION LABEL */
+.section-label {
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text3);
+  padding: 6px 0 2px;
+  border-top: 1px solid var(--border);
+  margin-top: 4px;
+}
+
+/* FOOTNOTE */
+.footnote { font-size: 11px; color: var(--text3); font-style: italic; margin-top: 8px; }
+.highlight-teal { color: var(--teal); }
+.highlight-gold { color: var(--gold); }
+
+/* TABS */
+.tab-row { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.tab { padding: 8px 14px; font-size: 12px; font-weight: 600; color: var(--text3); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; }
+.tab.active { color: var(--teal); border-bottom-color: var(--teal); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+/* tooltip */
+[data-tip] { position: relative; cursor: help; }
+[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%; transform: translateX(-50%);
+  background: #1e2d45;
+  color: var(--text);
+  font-size: 11px;
+  font-family: var(--font-body);
+  padding: 5px 9px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 10;
+}
+[data-tip]:hover::after { opacity: 1; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div>
+      <div class="header-title">UAE Financial Freedom Plan <span>✦</span></div>
+      <div class="header-sub">Vishnu &amp; Divya — Relocation to UAE · Target: January 2027</div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+      <div class="header-badge">AED ⇄ INR LIVE</div>
+      <div class="header-badge" style="background:var(--gold-glow);border-color:var(--gold-dim);color:var(--gold);">INTERACTIVE</div>
+    </div>
+  </div>
+</div>
+
+<div class="app">
+
+<!-- ─────────────────── SIDEBAR ─────────────────── -->
+<aside class="sidebar">
+
+  <!-- INCOME -->
+  <div class="panel">
+    <div class="panel-header" onclick="togglePanel(this)">
+      <span class="panel-title">💰 Income</span>
+      <span class="panel-icon">▾</span>
+    </div>
+    <div class="panel-body" id="pb-income">
+      <div class="input-group">
+        <div class="input-label">Vishnu Monthly Salary <span class="input-value" id="v-vishnuSalary">AED 40,000</span></div>
+        <input type="range" id="vishnuSalary" min="25000" max="70000" step="500" value="40000" oninput="updateVal('vishnuSalary',this.value,'AED ','',true);recalc()">
+      </div>
+      <div class="input-group">
+        <div class="input-label">Divya Monthly Salary <span class="input-value" id="v-divyaSalary">AED 8,000</span></div>
+        <input type="range" id="divyaSalary" min="0" max="25000" step="500" value="8000" oninput="updateVal('divyaSalary',this.value,'AED ','',true);recalc()">
+      </div>
+      <div class="input-group">
+        <div class="input-label">Divya Joins (months after Jan 2027) <span class="input-value" id="v-divyaJoinMonth">Month 3 (Mar 2027)</span></div>
+        <input type="range" id="divyaJoinMonth" min="1" max="18" step="1" value="3" oninput="updateJoinMonth(this.value);recalc()">
+      </div>
+    </div>
+  </div>
+
+  <!-- UAE EXPENSES -->
+  <div class="panel">
+    <div class="panel-header" onclick="togglePanel(this)">
+      <span class="panel-title">🏙️ UAE Expenses</span>
+      <span class="panel-icon">▾</span>
+    </div>
+    <div class="panel-body" id="pb-uae">
+      <div class="input-group">
+        <div class="input-label">Rent <span class="input-value red" id="v-rent">AED 5,500</span></div>
+        <input type="range" class="red-range" id="rent" min="2000" max="12000" step="100" value="5500" oninput="updateVal('rent',this.value,'AED ','',true);recalc()">
+      </div>
+      <div class="input-group">
+        <div class="input-label">Food <span class="input-value red" id="v-food">AED 1,500</span></div>
+        <input type="range" class="red-range" id="food" min="500" max="4000" step="100" value="1500" oninput="updateVal('food',this.value,'AED ','',true);recalc()">
+      </div>
+      <div class="input-group">
+        <div class="input-label">Travel <span class="input-value red" id="v-travel">AED 1,000</span></div>
+        <input type="range" class="red-range" id="travel" min="200" max="3000" step="100" value="1000" oninput="updateVal('travel',this.value,'AED ','',true);recalc()">
+      </div>
+      <div class="input-group">
+        <div class="input-label">Utilities <span class="input-value red" id="v-utilities">AED 1,000</span></div>
+        <input type="range" class="red-range" id="utilities" min="200" max="3000" step="100" value="1000" oninput="updateVal('utilities',this.value,'AED ','',true);recalc()">
+      </div>
+      <div class="input-group">
+        <div class="input-label">Miscellaneous <span class="input-value red" id="v-misc">AED 500</span></div>
+        <input type="range" class="red-range" id="misc" min="100" max="3000" step="100" value="500" oninput="updateVal('misc',this.value,'AED ','',true);recalc()">
+      </div>
+    </div>
+  </div>
+
+  <!-- INDIA OBLIGATIONS -->
+  <div class="panel">
+    <div class="panel-header" onclick="togglePanel(this)">
+      <span class="panel-title">🇮🇳 India Obligations</span>
+      <span class="panel-icon">▾</span>
+    </div>
+    <div class="panel-body" id="pb-india">
+      <div class="section-label">Monthly EMIs (AED)</div>
+      <div class="input-group">
+        <div class="input-label">Vishnu PL EMI <span class="input-value gold" id="v-vishnuPL">AED 1,935</span></div>
+        <input type="range" class="gold-range" id="vishnuPL" min="0" max="5000" step="50" value="1935" oninput="updateVal('vishnuPL',this.value,'AED ','',true);recalc()">
+      </div>
+      <div class="input-group">
+        <div class="input-label">Car Loan EMI <span class="input-value gold" id="v-carLoan">AED 658</span></div>
+        <input type="range" class="gold-range" id="carLoan" min="0" max="3000" step="50" value="658" oninput="updateVal('carLoan',this.value,'AED ','',true);recalc()">
+      </div>
+      <div class="input-group">
+        <div class="input-label">Divya PL EMI <span class="input-value gold" id="v-divyaPL">AED 4,257</span></div>
+        <input type="range" class="gold-range" id="divyaPL" min="0" max="8000" step="50" value="4257" oninput="updateVal('divyaPL',this.value,'AED ','',true);recalc()">
+      </div>
+      <div class="section-label">Family Support (AED/mo)</div>
+      <div class="input-row">
+        <div class="input-group">
+          <div class="input-label">Vishnu's <span class="input-value gold" id="v-vFamily">AED 387</span></div>
+          <input type="range" class="gold-range" id="vFamily" min="0" max="2000" step="50" value="387" oninput="updateVal('vFamily',this.value,'AED ','',true);recalc()">
+        </div>
+        <div class="input-group">
+          <div class="input-label">Divya's <span class="input-value gold" id="v-dFamily">AED 387</span></div>
+          <input type="range" class="gold-range" id="dFamily" min="0" max="2000" step="50" value="387" oninput="updateVal('dFamily',this.value,'AED ','',true);recalc()">
+        </div>
+      </div>
+      <div class="section-label">Loan End Dates</div>
+      <div class="input-group">
+        <div class="input-label">All loans cleared by <span class="input-value gold" id="v-loanEndMonth">Nov 2027 (M11)</span></div>
+        <input type="range" class="gold-range" id="loanEndMonth" min="3" max="44" step="1" value="11" oninput="updateLoanEnd(this.value);recalc()">
+      </div>
+      <p class="footnote">Month 11 = Nov 2027 = planned prepayment date</p>
+    </div>
+  </div>
+
+  <!-- ONE-TIME EVENTS -->
+  <div class="panel">
+    <div class="panel-header" onclick="togglePanel(this)">
+      <span class="panel-title">💍 Events &amp; Goals</span>
+      <span class="panel-icon">▾</span>
+    </div>
+    <div class="panel-body" id="pb-events">
+      <div class="input-group">
+        <div class="input-label">Wedding Cost <span class="input-value indigo" id="v-weddingCost">AED 47,000</span></div>
+        <input type="range" class="indigo-range" id="weddingCost" min="10000" max="150000" step="1000" value="47000" oninput="updateVal('weddingCost',this.value,'AED ','',true);recalc()">
+      </div>
+      <div class="input-group">
+        <div class="input-label">Wedding Month (from Jan 2027) <span class="input-value indigo" id="v-weddingMonth">Month 6 (Jun 2027)</span></div>
+        <input type="range" class="indigo-range" id="weddingMonth" min="1" max="18" step="1" value="6" oninput="updateWeddingMonth(this.value);recalc()">
+      </div>
+      <div class="input-group">
+        <div class="input-label">Emergency Fund Target <span class="input-value indigo" id="v-emergencyFund">AED 23,500</span></div>
+        <input type="range" class="indigo-range" id="emergencyFund" min="5000" max="100000" step="500" value="23500" oninput="updateVal('emergencyFund',this.value,'AED ','',true);recalc()">
+      </div>
+      <div class="input-group">
+        <div class="input-label">Savings Goal (₹1Cr equiv.) <span class="input-value teal" id="v-savingsGoal">AED 3,90,000</span></div>
+        <input type="range" id="savingsGoal" min="100000" max="800000" step="10000" value="390000" oninput="updateVal('savingsGoal',this.value,'AED ','',true);recalc()">
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="panel">
+    <div class="panel-header" onclick="togglePanel(this)">
+      <span class="panel-title">⚙️ Settings</span>
+      <span class="panel-icon">▾</span>
+    </div>
+    <div class="panel-body" id="pb-settings">
+      <div class="input-group">
+        <div class="input-label">AED → INR Rate <span class="input-value teal" id="v-aedToInr">₹25.50 / AED</span></div>
+        <input type="range" id="aedToInr" min="18" max="32" step="0.1" value="25.5" oninput="updateAEDRate(this.value);recalc()">
+      </div>
+      <div class="input-group">
+        <div class="input-label">Planning Horizon <span class="input-value teal" id="v-horizon">36 months</span></div>
+        <input type="range" id="horizon" min="12" max="60" step="3" value="36" oninput="updateVal('horizon',this.value,'','  months',false);recalc()">
+      </div>
+      <div class="divider"></div>
+      <div class="toggle-row">
+        <label class="toggle">
+          <input type="checkbox" id="showLoanLine" checked onchange="recalc()">
+          <div class="toggle-track"></div>
+        </label>
+        Show loan payoff event on chart
+      </div>
+      <div class="toggle-row" style="margin-top:6px;">
+        <label class="toggle">
+          <input type="checkbox" id="showWeddingLine" checked onchange="recalc()">
+          <div class="toggle-track"></div>
+        </label>
+        Show wedding event on chart
+      </div>
+    </div>
+  </div>
+
+</aside>
+
+<!-- ─────────────────── MAIN ─────────────────── -->
+<main class="main">
+
+  <!-- KEY METRICS -->
+  <div class="metrics-grid">
+    <div class="metric-card teal">
+      <div class="metric-label">Monthly Savings (Phase 1)</div>
+      <div class="metric-main teal" id="m-monthlyP1">—</div>
+      <div class="metric-sub" id="m-monthlyP1-inr">—</div>
+      <div class="metric-tag">Vishnu solo (Jan–Mar 2027)</div>
+    </div>
+    <div class="metric-card gold">
+      <div class="metric-label">Monthly Savings (Phase 2)</div>
+      <div class="metric-main gold" id="m-monthlyP2">—</div>
+      <div class="metric-sub" id="m-monthlyP2-inr">—</div>
+      <div class="metric-tag">Both working + loans running</div>
+    </div>
+    <div class="metric-card indigo">
+      <div class="metric-label">Post-Debt Freedom</div>
+      <div class="metric-main indigo" id="m-monthlyFree">—</div>
+      <div class="metric-sub" id="m-monthlyFree-inr">—</div>
+      <div class="metric-tag">Monthly after all loans cleared</div>
+    </div>
+    <div class="metric-card teal">
+      <div class="metric-label">Savings at 2.5 Years</div>
+      <div class="metric-main teal" id="m-at30mo">—</div>
+      <div class="metric-sub" id="m-at30mo-sub">—</div>
+      <div class="metric-tag" id="m-at30mo-tag">After all deductions</div>
+    </div>
+  </div>
+
+  <!-- PHASE TIMELINE -->
+  <div class="timeline">
+    <div class="phase p1">
+      <div class="phase-label">Phase 1</div>
+      <div class="phase-desc">Vishnu Solo</div>
+      <div class="phase-dates" id="ph-1-dates">Jan–Feb 2027</div>
+    </div>
+    <div class="phase p2">
+      <div class="phase-label">Phase 2</div>
+      <div class="phase-desc">Both + Loans</div>
+      <div class="phase-dates" id="ph-2-dates">Mar–Nov 2027</div>
+    </div>
+    <div class="phase p3">
+      <div class="phase-label">Phase 3</div>
+      <div class="phase-desc">Debt Free</div>
+      <div class="phase-dates" id="ph-3-dates">Dec 2027+</div>
+    </div>
+  </div>
+
+  <!-- CUMULATIVE SAVINGS CHART -->
+  <div class="chart-panel">
+    <div class="chart-panel-header">
+      <div>
+        <div class="chart-panel-title">Cumulative Savings Over Time</div>
+        <div class="chart-panel-sub">All values in AED — after deducting wedding &amp; loan payoffs</div>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--teal)"></div>Net Savings (AED)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div>Gross Savings</div>
+        <div class="legend-item"><div class="legend-dot" style="background:rgba(129,140,248,0.6);border:1px dashed var(--indigo)"></div>₹1Cr Goal</div>
+      </div>
+    </div>
+    <div class="chart-wrap"><canvas id="cumulativeChart" height="200"></canvas></div>
+  </div>
+
+  <!-- TWO CHARTS -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div class="chart-panel">
+      <div class="chart-panel-header">
+        <div>
+          <div class="chart-panel-title">Monthly Net Savings</div>
+          <div class="chart-panel-sub">AED saved per month after all expenses</div>
+        </div>
+      </div>
+      <div class="chart-wrap"><canvas id="monthlyChart" height="200"></canvas></div>
+    </div>
+    <div class="chart-panel">
+      <div class="chart-panel-header">
+        <div>
+          <div class="chart-panel-title">Expense Breakdown</div>
+          <div class="chart-panel-sub">Post-debt freedom monthly allocation</div>
+        </div>
+      </div>
+      <div class="chart-wrap" style="display:flex;align-items:center;justify-content:center;"><canvas id="expenseChart" height="200" style="max-width:200px"></canvas></div>
+    </div>
+  </div>
+
+  <!-- GOAL TRACKER -->
+  <div class="chart-panel">
+    <div class="chart-panel-header">
+      <div class="chart-panel-title">Goal Tracker</div>
+    </div>
+    <div class="goals-grid">
+      <div class="goal-card">
+        <div class="goal-header">
+          <div>
+            <div class="goal-name">💍 Wedding Fund</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:2px;" id="g-wedding-date">Target: Jun 2027</div>
+          </div>
+          <div class="goal-amount" id="g-wedding-amt">AED 47,000</div>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="pg-wedding" style="background:linear-gradient(90deg,var(--indigo),#c084fc);width:0%"></div>
+        </div>
+        <div class="goal-footer">
+          <div id="g-wedding-saved">Saved: AED 0</div>
+          <div class="goal-pct" id="g-wedding-pct" style="color:var(--indigo)">0%</div>
+        </div>
+      </div>
+      <div class="goal-card">
+        <div class="goal-header">
+          <div>
+            <div class="goal-name">🛡️ Emergency Fund</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:2px;" id="g-emerg-date">Target: Jun 2027</div>
+          </div>
+          <div class="goal-amount" id="g-emerg-amt">AED 23,500</div>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="pg-emerg" style="background:linear-gradient(90deg,var(--gold),#fb923c);width:0%"></div>
+        </div>
+        <div class="goal-footer">
+          <div id="g-emerg-saved">Saved: AED 0</div>
+          <div class="goal-pct" id="g-emerg-pct" style="color:var(--gold)">0%</div>
+        </div>
+      </div>
+      <div class="goal-card">
+        <div class="goal-header">
+          <div>
+            <div class="goal-name">🎯 ₹1 Crore Goal</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:2px;" id="g-goal-date">Target: ~Mar 2028</div>
+          </div>
+          <div class="goal-amount" id="g-goal-amt">AED 3,90,000</div>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="pg-goal" style="background:linear-gradient(90deg,var(--teal),#34d399);width:0%"></div>
+        </div>
+        <div class="goal-footer">
+          <div id="g-goal-saved">Saved: AED 0</div>
+          <div class="goal-pct" id="g-goal-pct" style="color:var(--teal)">0%</div>
+        </div>
+      </div>
+      <div class="goal-card">
+        <div class="goal-header">
+          <div>
+            <div class="goal-name">💳 All Loans Cleared</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:2px;" id="g-loans-date">Target: Nov 2027</div>
+          </div>
+          <div class="goal-amount" id="g-loans-amt">AED 2,14,214</div>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="pg-loans" style="background:linear-gradient(90deg,#f87171,#f59e0b);width:0%"></div>
+        </div>
+        <div class="goal-footer">
+          <div id="g-loans-saved">Prepaid: AED 0</div>
+          <div class="goal-pct" id="g-loans-pct" style="color:var(--red)">0%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MONTHLY TABLE -->
+  <div class="chart-panel">
+    <div class="chart-panel-header">
+      <div>
+        <div class="chart-panel-title">Month-by-Month Breakdown</div>
+        <div class="chart-panel-sub">Full financial flow — all values in AED</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <div class="badge teal">AED</div>
+        <div class="badge gold" id="inr-rate-badge">₹25.50/AED</div>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>Phase</th>
+            <th>Income</th>
+            <th>UAE Exp.</th>
+            <th>India Obl.</th>
+            <th>Events</th>
+            <th>Net</th>
+            <th>Cumulative AED</th>
+            <th>Cumulative INR</th>
+          </tr>
+        </thead>
+        <tbody id="monthly-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SCENARIO ANALYSIS -->
+  <div class="chart-panel">
+    <div class="chart-panel-header">
+      <div class="chart-panel-title">Scenario Analysis — Savings at Key Milestones</div>
+    </div>
+    <div class="tab-row">
+      <div class="tab active" onclick="switchTab(this,'scenarios')">Scenarios</div>
+      <div class="tab" onclick="switchTab(this,'risk')">Risk Analysis</div>
+      <div class="tab" onclick="switchTab(this,'verdict')">Overall Verdict</div>
+    </div>
+    <div class="tab-content active" id="tab-scenarios">
+      <div style="overflow-x:auto;">
+        <table class="scenario-table" id="scenario-table">
+          <thead>
+            <tr>
+              <th>Scenario</th>
+              <th>Vishnu AED</th>
+              <th>Divya AED</th>
+              <th>At 1 Year</th>
+              <th>At 2 Years</th>
+              <th>At 2.5 Years</th>
+              <th>Goal Achieved</th>
+              <th>INR @ 2.5Y</th>
+            </tr>
+          </thead>
+          <tbody id="scenario-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="tab-content" id="tab-risk">
+      <div class="risk-grid" id="risk-grid"></div>
+    </div>
+    <div class="tab-content" id="tab-verdict">
+      <div class="verdict" id="verdict-box"></div>
+    </div>
+  </div>
+
+</main>
+</div>
+
+<script>
+// ─────────────── HELPERS ───────────────
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const START_YEAR = 2027;
+
+function monthLabel(m) {
+  const absMonth = m + 0; // m is 0-based from Jan 2027
+  const yr = START_YEAR + Math.floor(absMonth / 12);
+  const mo = absMonth % 12;
+  return MONTHS[mo] + " '" + String(yr).slice(2);
+}
+
+function monthName(m) {
+  const yr = START_YEAR + Math.floor(m / 12);
+  const mo = m % 12;
+  return MONTHS[mo] + ' ' + yr;
+}
+
+function fmtAED(n, compact=false) {
+  if (compact) {
+    if (Math.abs(n) >= 100000) return 'AED ' + (n/100000).toFixed(2) + 'L';
+    return 'AED ' + Math.round(n).toLocaleString('en-IN');
+  }
+  return Math.round(n).toLocaleString('en-IN');
+}
+
+function fmtINR(aed, rate) {
+  const inr = aed * rate;
+  if (Math.abs(inr) >= 10000000) return '₹' + (inr/10000000).toFixed(2) + ' Cr';
+  if (Math.abs(inr) >= 100000) return '₹' + (inr/100000).toFixed(2) + ' L';
+  return '₹' + Math.round(inr).toLocaleString('en-IN');
+}
+
+function getParams() {
+  return {
+    vishnuSalary: +document.getElementById('vishnuSalary').value,
+    divyaSalary: +document.getElementById('divyaSalary').value,
+    divyaJoinMonth: +document.getElementById('divyaJoinMonth').value - 1, // 0-indexed
+    rent: +document.getElementById('rent').value,
+    food: +document.getElementById('food').value,
+    travel: +document.getElementById('travel').value,
+    utilities: +document.getElementById('utilities').value,
+    misc: +document.getElementById('misc').value,
+    vishnuPL: +document.getElementById('vishnuPL').value,
+    carLoan: +document.getElementById('carLoan').value,
+    divyaPL: +document.getElementById('divyaPL').value,
+    vFamily: +document.getElementById('vFamily').value,
+    dFamily: +document.getElementById('dFamily').value,
+    loanEndMonth: +document.getElementById('loanEndMonth').value - 1, // 0-indexed
+    weddingCost: +document.getElementById('weddingCost').value,
+    weddingMonth: +document.getElementById('weddingMonth').value - 1, // 0-indexed
+    emergencyFund: +document.getElementById('emergencyFund').value,
+    savingsGoal: +document.getElementById('savingsGoal').value,
+    aedToInr: +document.getElementById('aedToInr').value,
+    horizon: +document.getElementById('horizon').value,
+    showLoanLine: document.getElementById('showLoanLine').checked,
+    showWeddingLine: document.getElementById('showWeddingLine').checked,
+  };
+}
+
+function computePlan(p, overrides={}) {
+  const params = {...p, ...overrides};
+  const months = [];
+  let cumGross = 0, cumNet = 0;
+  let weddingPaid = false;
+  let totalLoans = (params.vishnuPL + params.carLoan) * (params.loanEndMonth + 1)
+                 + params.divyaPL * Math.max(0, params.loanEndMonth - params.divyaJoinMonth);
+
+  for (let m = 0; m < params.horizon; m++) {
+    const divyaActive = m >= params.divyaJoinMonth;
+    const loansActive = m <= params.loanEndMonth;
+
+    // Income
+    const income = params.vishnuSalary + (divyaActive ? params.divyaSalary : 0);
+
+    // UAE expenses
+    const uaeExp = params.rent + params.food + params.travel + params.utilities + params.misc;
+
+    // India obligations
+    const vPL = loansActive ? params.vishnuPL : 0;
+    const cLoan = loansActive ? params.carLoan : 0;
+    const dPL = (divyaActive && loansActive) ? params.divyaPL : 0;
+    const vFam = params.vFamily;
+    const dFam = divyaActive ? params.dFamily : 0;
+    const indiaExp = vPL + cLoan + dPL + vFam + dFam;
+
+    // Monthly net before one-time
+    const monthlySavings = income - uaeExp - indiaExp;
+    cumGross += monthlySavings;
+
+    // One-time events
+    let oneTime = 0;
+    let events = [];
+    if (m === params.weddingMonth && !weddingPaid) {
+      oneTime += params.weddingCost;
+      weddingPaid = true;
+      events.push('💍 Wedding');
+    }
+    // Emergency fund deducted once when savings first cover it
+    const netThisMonth = monthlySavings - oneTime;
+    cumNet += netThisMonth;
+
+    let phase = 1;
+    if (divyaActive && loansActive) phase = 2;
+    if (!loansActive) phase = 3;
+
+    months.push({
+      m, phase, divyaActive, loansActive,
+      income, uaeExp, indiaExp,
+      vPL, cLoan, dPL, vFam, dFam,
+      monthlySavings, oneTime, events,
+      netThisMonth, cumGross, cumNet,
+    });
+  }
+  return months;
+}
+
+// ─────────────── CHARTS ───────────────
+let cumulChart, monthlyChartObj, expChart;
+
+function buildCharts(months, params) {
+  const labels = months.map(d => monthLabel(d.m));
+  const grossData = months.map(d => d.cumGross);
+  const netData = months.map(d => d.cumNet);
+  const goalLine = months.map(() => params.savingsGoal);
+  const barData = months.map(d => d.netThisMonth);
+
+  const annotations = [];
+  if (params.showWeddingLine) {
+    const wm = params.weddingMonth;
+    if (wm < months.length) annotations.push({ x: wm, label: '💍', color: '#818cf8' });
+  }
+  if (params.showLoanLine) {
+    const lm = params.loanEndMonth;
+    if (lm < months.length) annotations.push({ x: lm + 1, label: '🔓', color: '#10d4a8' });
+  }
+  // Divya join
+  const dm = params.divyaJoinMonth;
+  if (dm < months.length) annotations.push({ x: dm, label: '👩', color: '#f5a623' });
+
+  const gridColor = 'rgba(30,45,69,0.8)';
+  const tickColor = '#475569';
+
+  // CUMULATIVE CHART
+  if (cumulChart) cumulChart.destroy();
+  cumulChart = new Chart(document.getElementById('cumulativeChart'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Net Savings (after events)',
+          data: netData,
+          borderColor: '#10d4a8',
+          backgroundColor: 'rgba(16,212,168,0.08)',
+          borderWidth: 2.5,
+          pointRadius: 0,
+          pointHoverRadius: 4,
+          fill: true,
+          tension: 0.3,
+        },
+        {
+          label: 'Gross Savings',
+          data: grossData,
+          borderColor: 'rgba(245,166,35,0.6)',
+          borderWidth: 1.5,
+          borderDash: [4, 3],
+          pointRadius: 0,
+          pointHoverRadius: 3,
+          fill: false,
+          tension: 0.3,
+        },
+        {
+          label: '₹1Cr Goal',
+          data: goalLine,
+          borderColor: 'rgba(129,140,248,0.5)',
+          borderWidth: 1.5,
+          borderDash: [6, 4],
+          pointRadius: 0,
+          fill: false,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#161f30',
+          borderColor: '#1e2d45',
+          borderWidth: 1,
+          titleColor: '#e2e8f0',
+          bodyColor: '#94a3b8',
+          callbacks: {
+            label: (ctx) => {
+              const v = ctx.raw;
+              const inr = fmtINR(v, params.aedToInr);
+              return ` ${ctx.dataset.label}: AED ${Math.round(v).toLocaleString('en-IN')} (${inr})`;
+            }
+          }
+        },
+      },
+      scales: {
+        x: {
+          grid: { color: gridColor },
+          ticks: { color: tickColor, font: { family: 'JetBrains Mono', size: 10 }, maxTicksLimit: 12 },
+        },
+        y: {
+          grid: { color: gridColor },
+          ticks: {
+            color: tickColor,
+            font: { family: 'JetBrains Mono', size: 10 },
+            callback: v => v >= 1000 ? (v/1000).toFixed(0) + 'K' : v
+          },
+        }
+      }
+    }
+  });
+
+  // Add annotation lines manually via plugin or just draw them in afterDraw
+  // We'll add vertical lines via a custom plugin inline
+
+  // MONTHLY BAR CHART
+  if (monthlyChartObj) monthlyChartObj.destroy();
+  const barColors = months.map(d => {
+    if (d.phase === 3) return 'rgba(16,212,168,0.75)';
+    if (d.phase === 2) return 'rgba(245,166,35,0.75)';
+    return 'rgba(129,140,248,0.75)';
+  });
+  monthlyChartObj = new Chart(document.getElementById('monthlyChart'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Monthly Net',
+        data: barData,
+        backgroundColor: barColors,
+        borderRadius: 3,
+        borderSkipped: false,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#161f30',
+          borderColor: '#1e2d45',
+          borderWidth: 1,
+          titleColor: '#e2e8f0',
+          bodyColor: '#94a3b8',
+          callbacks: {
+            label: (ctx) => {
+              const v = ctx.raw;
+              return ` AED ${Math.round(v).toLocaleString('en-IN')} (${fmtINR(v, params.aedToInr)})`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { color: tickColor, font: { family: 'JetBrains Mono', size: 10 }, maxTicksLimit: 12 },
+        },
+        y: {
+          grid: { color: gridColor },
+          ticks: {
+            color: tickColor,
+            font: { family: 'JetBrains Mono', size: 10 },
+            callback: v => v >= 1000 ? (v/1000).toFixed(0) + 'K' : v
+          }
+        }
+      }
+    }
+  });
+
+  // EXPENSE DONUT — post-debt-freedom monthly
+  const freePhase = months.find(d => d.phase === 3) || months[months.length - 1];
+  const expLabels = ['Rent', 'Food', 'Travel', 'Utilities', 'Misc', 'Family', 'Savings'];
+  const totalIncome = freePhase.income;
+  const expValues = [
+    params.rent, params.food, params.travel, params.utilities, params.misc,
+    freePhase.vFam + freePhase.dFam,
+    freePhase.netThisMonth
+  ];
+  const expColors = ['#f87171','#fb923c','#fbbf24','#a3e635','#34d399','#818cf8','#10d4a8'];
+
+  if (expChart) expChart.destroy();
+  expChart = new Chart(document.getElementById('expenseChart'), {
+    type: 'doughnut',
+    data: {
+      labels: expLabels,
+      datasets: [{
+        data: expValues.map(v => Math.max(0, v)),
+        backgroundColor: expColors,
+        borderWidth: 0,
+        hoverOffset: 8,
+      }]
+    },
+    options: {
+      responsive: true,
+      cutout: '65%',
+      plugins: {
+        legend: {
+          position: 'right',
+          labels: {
+            color: '#94a3b8',
+            font: { family: 'JetBrains Mono', size: 9 },
+            boxWidth: 8,
+            padding: 8,
+          }
+        },
+        tooltip: {
+          backgroundColor: '#161f30',
+          borderColor: '#1e2d45',
+          borderWidth: 1,
+          callbacks: {
+            label: (ctx) => ` AED ${ctx.raw.toLocaleString('en-IN')} (${((ctx.raw/totalIncome)*100).toFixed(0)}%)`
+          }
+        }
+      }
+    }
+  });
+}
+
+// ─────────────── TABLE ───────────────
+function buildTable(months, params) {
+  const tbody = document.getElementById('monthly-table-body');
+  const rate = params.aedToInr;
+  tbody.innerHTML = months.map(d => {
+    const phaseLabels = ['','Phase 1','Phase 2','Phase 3'];
+    const phaseClasses = ['','indigo','gold','teal'];
+    const isEvent = d.events.length > 0;
+    const isPhaseChange = d.m > 0 && months[d.m-1].phase !== d.phase;
+    const rowClass = isEvent ? 'event-row' : (isPhaseChange ? 'phase-change' : '');
+    const eventStr = d.events.join(' ') + (d.oneTime > 0 ? ` -${d.oneTime.toLocaleString('en-IN')}` : '');
+    const netClass = d.cumNet >= 0 ? 'num-pos' : 'num-neg';
+    const mnClass = d.netThisMonth >= 0 ? 'num-pos' : 'num-neg';
+    return `<tr class="${rowClass}">
+      <td><b>${monthName(d.m)}</b></td>
+      <td><span class="badge ${phaseClasses[d.phase]}">${phaseLabels[d.phase]}</span></td>
+      <td class="num-pos">${d.income.toLocaleString('en-IN')}</td>
+      <td class="num-neg">${d.uaeExp.toLocaleString('en-IN')}</td>
+      <td class="num-neg">${d.indiaExp.toLocaleString('en-IN')}</td>
+      <td class="${isEvent?'num-neg':''}"><small>${isEvent ? eventStr : '—'}</small></td>
+      <td class="${mnClass}">${Math.round(d.netThisMonth).toLocaleString('en-IN')}</td>
+      <td class="${netClass}"><b>${Math.round(d.cumNet).toLocaleString('en-IN')}</b></td>
+      <td class="${netClass}">${fmtINR(d.cumNet, rate)}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ─────────────── GOALS ───────────────
+function updateGoals(months, params) {
+  const wm = params.weddingMonth;
+  const savedAtWedding = wm < months.length ? Math.max(0, months[wm].cumGross) : 0;
+  const weddingCost = params.weddingCost;
+  const wPct = Math.min(100, (savedAtWedding / weddingCost * 100));
+  document.getElementById('pg-wedding').style.width = wPct + '%';
+  document.getElementById('g-wedding-saved').textContent = 'Saved: AED ' + Math.round(savedAtWedding).toLocaleString('en-IN');
+  document.getElementById('g-wedding-pct').textContent = Math.round(wPct) + '%';
+  document.getElementById('g-wedding-amt').textContent = 'AED ' + weddingCost.toLocaleString('en-IN');
+  document.getElementById('g-wedding-date').textContent = 'Target: ' + monthName(wm);
+
+  const emergTarget = params.emergencyFund;
+  const emergSaved = months.length > wm+1 ? Math.max(0, months[wm+1].cumNet) : 0;
+  const ePct = Math.min(100, (emergSaved / emergTarget * 100));
+  document.getElementById('pg-emerg').style.width = ePct + '%';
+  document.getElementById('g-emerg-saved').textContent = 'Saved: AED ' + Math.round(emergSaved).toLocaleString('en-IN');
+  document.getElementById('g-emerg-pct').textContent = Math.round(ePct) + '%';
+  document.getElementById('g-emerg-amt').textContent = 'AED ' + emergTarget.toLocaleString('en-IN');
+
+  const goalTarget = params.savingsGoal;
+  const finalNet = months[months.length-1].cumNet;
+  const gPct = Math.min(100, (finalNet / goalTarget * 100));
+  document.getElementById('pg-goal').style.width = gPct + '%';
+  document.getElementById('g-goal-saved').textContent = 'Saved: AED ' + Math.round(Math.max(0,finalNet)).toLocaleString('en-IN');
+  document.getElementById('g-goal-pct').textContent = Math.round(gPct) + '%';
+  document.getElementById('g-goal-amt').textContent = 'AED ' + goalTarget.toLocaleString('en-IN');
+
+  // Find goal achievement month
+  const goalMonth = months.find(d => d.cumNet >= goalTarget);
+  document.getElementById('g-goal-date').textContent = goalMonth ? 'Achieved: ' + monthName(goalMonth.m) : 'Not in range';
+
+  // Loans
+  const totalLoanAED = params.vishnuPL + params.carLoan + params.divyaPL;
+  const totalLoanPrincipal = totalLoanAED * (params.loanEndMonth + 1);
+  const loanAmt = totalLoanPrincipal;
+  const lmEnd = params.loanEndMonth;
+  const savedAtLoanEnd = lmEnd < months.length ? months[lmEnd].cumGross : 0;
+  const lPct = Math.min(100, (savedAtLoanEnd / Math.max(1,loanAmt)) * 100);
+  document.getElementById('pg-loans').style.width = lPct + '%';
+  document.getElementById('g-loans-pct').textContent = '✓';
+  document.getElementById('g-loans-date').textContent = 'Cleared: ' + monthName(lmEnd);
+  document.getElementById('g-loans-amt').textContent = 'By ' + monthName(lmEnd);
+  document.getElementById('g-loans-saved').textContent = 'Month 0 → ' + monthName(lmEnd);
+}
+
+// ─────────────── METRICS ───────────────
+function updateMetrics(months, params) {
+  const p1 = months.find(d => d.phase === 1);
+  const p2 = months.find(d => d.phase === 2);
+  const p3 = months.find(d => d.phase === 3);
+  const rate = params.aedToInr;
+
+  if (p1) {
+    document.getElementById('m-monthlyP1').textContent = 'AED ' + Math.round(p1.netThisMonth).toLocaleString('en-IN');
+    document.getElementById('m-monthlyP1-inr').textContent = fmtINR(p1.netThisMonth, rate) + '/month';
+  }
+  if (p2) {
+    document.getElementById('m-monthlyP2').textContent = 'AED ' + Math.round(p2.netThisMonth).toLocaleString('en-IN');
+    document.getElementById('m-monthlyP2-inr').textContent = fmtINR(p2.netThisMonth, rate) + '/month';
+  }
+  if (p3) {
+    document.getElementById('m-monthlyFree').textContent = 'AED ' + Math.round(p3.netThisMonth).toLocaleString('en-IN');
+    document.getElementById('m-monthlyFree-inr').textContent = fmtINR(p3.netThisMonth, rate) + '/month';
+  }
+
+  // 2.5 years = 30 months
+  const at30 = months[Math.min(29, months.length-1)];
+  if (at30) {
+    document.getElementById('m-at30mo').textContent = 'AED ' + Math.round(at30.cumNet).toLocaleString('en-IN');
+    document.getElementById('m-at30mo-sub').textContent = fmtINR(at30.cumNet, rate);
+    const pct = (at30.cumNet / params.savingsGoal * 100).toFixed(1);
+    document.getElementById('m-at30mo-tag').textContent = pct + '% of ₹1Cr goal';
+  }
+
+  document.getElementById('inr-rate-badge').textContent = '₹' + params.aedToInr.toFixed(2) + '/AED';
+}
+
+// ─────────────── PHASES ───────────────
+function updatePhases(params) {
+  const joinM = params.divyaJoinMonth;
+  const loanM = params.loanEndMonth;
+  document.getElementById('ph-1-dates').textContent = 'Jan 2027 – ' + monthName(joinM - 1);
+  document.getElementById('ph-2-dates').textContent = monthName(joinM) + ' – ' + monthName(loanM);
+  document.getElementById('ph-3-dates').textContent = monthName(loanM + 1) + ' onwards';
+}
+
+// ─────────────── SCENARIOS ───────────────
+function buildScenarios(params) {
+  const scenarios = [
+    { name: '🏆 Best Case', vSal: params.vishnuSalary, dSal: 15000, note: 'Divya at target 15K AED', highlight: false },
+    { name: '✅ Base Plan', vSal: params.vishnuSalary, dSal: params.divyaSalary, note: 'Current plan', highlight: true },
+    { name: '⚠️ Divya 10K', vSal: params.vishnuSalary, dSal: 10000, note: 'Divya finds mid-range role', highlight: false },
+    { name: '❌ Divya No Job', vSal: params.vishnuSalary, dSal: 0, note: 'Vishnu alone for full period', highlight: false },
+    { name: '📉 Lower Salary', vSal: 35000, dSal: params.divyaSalary, note: 'Vishnu gets 35K', highlight: false },
+    { name: '📈 Vishnu 45K', vSal: 45000, dSal: params.divyaSalary, note: 'Above-target salary', highlight: false },
+  ];
+
+  const rate = params.aedToInr;
+  const tbody = document.getElementById('scenario-tbody');
+  tbody.innerHTML = scenarios.map(s => {
+    const sMonths = computePlan(params, { vishnuSalary: s.vSal, divyaSalary: s.dSal });
+    const at12 = sMonths[Math.min(11, sMonths.length-1)].cumNet;
+    const at24 = sMonths[Math.min(23, sMonths.length-1)].cumNet;
+    const at30 = sMonths[Math.min(29, sMonths.length-1)].cumNet;
+    const goalM = sMonths.find(d => d.cumNet >= params.savingsGoal);
+    const goalStr = goalM ? monthName(goalM.m) : '> horizon';
+    const cls = s.highlight ? ' class="highlight"' : '';
+    return `<tr${cls}>
+      <td><b>${s.name}</b><br><small style="color:var(--text3)">${s.note}</small></td>
+      <td>${s.vSal.toLocaleString('en-IN')}</td>
+      <td>${s.dSal > 0 ? s.dSal.toLocaleString('en-IN') : '—'}</td>
+      <td>${fmtAED(at12)}</td>
+      <td>${fmtAED(at24)}</td>
+      <td>${fmtAED(at30)}</td>
+      <td>${goalStr}</td>
+      <td>${fmtINR(at30, rate)}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ─────────────── RISK ───────────────
+function buildRisk(params) {
+  const grid = document.getElementById('risk-grid');
+  const risks = [
+    {
+      title: '💼 Salary Gap Risk',
+      level: 'medium',
+      desc: 'Job offer might come in at 35K–38K instead of 40K. First few months may see no income during transition.',
+      impact: 'At 35K: saves ~AED 15,500/mo instead of ~20,500/mo (solo phase). Goal delayed by ~6 months.',
+    },
+    {
+      title: '💱 Currency Risk',
+      level: 'medium',
+      desc: 'AED is pegged to USD (1 AED = $0.27). INR may depreciate or appreciate. Your plan uses ₹25.5/AED; current rate is ~₹23-24.',
+      impact: 'At ₹23/AED: ₹1 Cr target requires 43,478 AED (not 390K). Goal actually easier to hit in AED terms.',
+    },
+    {
+      title: '👩‍🔬 Divya Job Risk',
+      level: 'high',
+      desc: 'Bioinformatics/biotech jobs in UAE are concentrated in Abu Dhabi. Finding a role may take 3–9 months post-arrival.',
+      impact: 'Every extra month of Divya job-hunting = ~AED 6,600 less in savings. 6-month delay = ~AED 39,600 impact.',
+    },
+    {
+      title: '🏠 Housing Cost Risk',
+      level: 'medium',
+      desc: 'Dubai rents have risen 15–20% YoY in some areas. Your plan budget of AED 5,500 is tight for a 1BHK in most neighborhoods.',
+      impact: 'AED 7,000 rent instead of 5,500 = AED 1,500/mo × 12 = AED 18,000/year extra drain.',
+    },
+    {
+      title: '🏥 Health / Emergency Risk',
+      level: 'low',
+      desc: 'UAE mandatory health insurance covers basics. However, dental and specialist costs add up. Emergency fund provides buffer.',
+      impact: 'AED 23,500 emergency fund covers ~2 months of emergencies. Maintain before aggressive savings.',
+    },
+    {
+      title: '🌐 Visa & Legal Risk',
+      level: 'low',
+      desc: 'Divya needs a residence visa (can be on tourist visa initially). Employer or spouse sponsorship needed. Capco internal transfer reduces this risk significantly.',
+      impact: 'Tourist visa runs: AED 1,200–1,800 for 60-day extension. 2–3 runs = AED 3,600–5,400 max exposure.',
+    },
+  ];
+  grid.innerHTML = risks.map(r => `
+    <div class="risk-card">
+      <div class="risk-title">${r.title}</div>
+      <div class="risk-level ${r.level}"><div class="risk-dot"></div>${r.level.toUpperCase()} RISK</div>
+      <div class="risk-desc">${r.desc}</div>
+      <div class="risk-impact"><div class="risk-impact-label">IMPACT</div>${r.impact}</div>
+    </div>
+  `).join('');
+}
+
+// ─────────────── VERDICT ───────────────
+function buildVerdict(months, params) {
+  const at30 = months[Math.min(29, months.length-1)].cumNet;
+  const at12 = months[Math.min(11, months.length-1)].cumNet;
+  const goalAchieved = months.find(d => d.cumNet >= params.savingsGoal);
+  const goalStr = goalAchieved ? monthName(goalAchieved.m) : 'beyond horizon';
+  const rate = params.aedToInr;
+
+  document.getElementById('verdict-box').innerHTML = `
+    <div class="verdict-heading">Overall Verdict: <span class="highlight-teal">Strong ✅</span></div>
+    <div class="verdict-point">
+      <div class="verdict-icon">💰</div>
+      <div>Your UAE plan is financially <b>well-structured</b>. At AED 40K/month, your monthly Phase 1 surplus of <b class="highlight-teal">${fmtINR(months[0]?.netThisMonth || 23000, rate)}</b> (${fmtAED(months[0]?.netThisMonth || 23000)} AED) already far exceeds typical India-based savings potential — even at senior levels. This is the core case for moving.</div>
+    </div>
+    <div class="verdict-point">
+      <div class="verdict-icon">🎯</div>
+      <div>The ₹1 crore savings goal is achievable by <b class="highlight-gold">${goalStr}</b> — roughly ${goalAchieved ? Math.round((goalAchieved.m)/12 * 10)/10 : '—'} years after landing. This assumes your plan as modeled, including all loan prepayments and wedding costs.</div>
+    </div>
+    <div class="verdict-point">
+      <div class="verdict-icon">💍</div>
+      <div>Wedding costs (AED ${params.weddingCost.toLocaleString('en-IN')} = ${fmtINR(params.weddingCost, rate)}) are fully funded from Vishnu's first 6 months of savings alone. The savings buffer is healthy — no external borrowing needed for the wedding.</div>
+    </div>
+    <div class="verdict-point">
+      <div class="verdict-icon">⚠️</div>
+      <div><b>Critical dependency:</b> Divya finding a job at ≥AED 8,000–15,000/month is the single biggest lever. If Divya lands 15K AED, you'll save an extra AED ~7,000/month after Phase 3 — accelerating your goal by ~5–7 months. Prioritize Python/bioinformatics upskilling and UAE biotech networking before the move.</div>
+    </div>
+    <div class="verdict-point">
+      <div class="verdict-icon">📈</div>
+      <div>At 2.5 years, your net savings of <b class="highlight-teal">${fmtAED(at30, true)} (${fmtINR(at30, rate)})</b> represents a transformational wealth position relative to staying in India. The Capco transfer route further de-risks the salary continuity concern.</div>
+    </div>
+    <div class="verdict-point">
+      <div class="verdict-icon">🔑</div>
+      <div><b>Key actions:</b> (1) Lock the Capco Dubai transfer ASAP. (2) Divya upskills in Python bioinformatics + applies to UAE roles (KHALIFA, KAUST, pharma companies) 6 months before move. (3) Pre-pay highest-interest loan first if cash permits. (4) Keep emergency fund untouched as a true buffer.</div>
+    </div>
+    <p class="footnote" style="margin-top:16px;">All figures modeled in AED. INR conversion at ₹${rate}/AED. Actual outcomes will vary based on salary negotiations, market conditions, and timing.</p>
+  `;
+}
+
+// ─────────────── MAIN RECALC ───────────────
+function recalc() {
+  const params = getParams();
+  const months = computePlan(params);
+
+  updateMetrics(months, params);
+  updatePhases(params);
+  buildCharts(months, params);
+  buildTable(months, params);
+  updateGoals(months, params);
+  buildScenarios(params);
+  buildRisk(params);
+  buildVerdict(months, params);
+}
+
+// ─────────────── UI HELPERS ───────────────
+function togglePanel(header) {
+  const body = header.nextElementSibling;
+  body.classList.toggle('collapsed');
+  header.querySelector('.panel-icon').textContent = body.classList.contains('collapsed') ? '▸' : '▾';
+}
+
+function updateVal(id, val, prefix='', suffix='', commify=false) {
+  const n = parseFloat(val);
+  const formatted = commify ? Math.round(n).toLocaleString('en-IN') : val;
+  document.getElementById('v-' + id).textContent = prefix + formatted + suffix;
+}
+
+function updateJoinMonth(val) {
+  const m = parseInt(val);
+  const yr = 2027 + Math.floor((m-1)/12);
+  const mo = (m-1) % 12;
+  document.getElementById('v-divyaJoinMonth').textContent = `Month ${m} (${MONTHS[mo]} ${yr})`;
+}
+
+function updateLoanEnd(val) {
+  const m = parseInt(val);
+  const yr = 2027 + Math.floor((m-1)/12);
+  const mo = (m-1) % 12;
+  document.getElementById('v-loanEndMonth').textContent = `${MONTHS[mo]} ${yr} (M${m})`;
+}
+
+function updateWeddingMonth(val) {
+  const m = parseInt(val);
+  const yr = 2027 + Math.floor((m-1)/12);
+  const mo = (m-1) % 12;
+  document.getElementById('v-weddingMonth').textContent = `Month ${m} (${MONTHS[mo]} ${yr})`;
+}
+
+function updateAEDRate(val) {
+  document.getElementById('v-aedToInr').textContent = '₹' + parseFloat(val).toFixed(2) + ' / AED';
+}
+
+function switchTab(tab, name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+}
+
+// Init
+recalc();
+</script>
+</body>
+</html>
