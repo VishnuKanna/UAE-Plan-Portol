@@ -275,6 +275,33 @@ tbody tr.phase-change { background: rgba(16,212,168,0.04); }
 .verdict-point { display: flex; gap: 10px; margin-bottom: 10px; font-size: 13px; line-height: 1.5; }
 .verdict-icon { flex-shrink: 0; font-size: 14px; }
 
+/* INR PILL */
+.inr-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 3px;
+  padding: 3px 8px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  width: fit-content;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text3);
+  transition: color 0.2s;
+}
+.inr-pill .inr-flag { font-size: 10px; opacity: 0.7; }
+.inr-pill .inr-val { color: var(--text2); font-weight: 500; letter-spacing: 0.3px; }
+.inr-pill.teal { border-color: rgba(16,212,168,0.2); }
+.inr-pill.teal .inr-val { color: rgba(16,212,168,0.75); }
+.inr-pill.gold { border-color: rgba(245,166,35,0.2); }
+.inr-pill.gold .inr-val { color: rgba(245,166,35,0.75); }
+.inr-pill.red { border-color: rgba(248,113,113,0.2); }
+.inr-pill.red .inr-val { color: rgba(248,113,113,0.7); }
+.inr-pill.indigo { border-color: rgba(129,140,248,0.2); }
+.inr-pill.indigo .inr-val { color: rgba(129,140,248,0.75); }
+
 /* TOGGLE */
 .toggle-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text2); }
 .toggle { position: relative; width: 32px; height: 18px; }
@@ -380,10 +407,12 @@ tbody tr.phase-change { background: rgba(16,212,168,0.04); }
       <div class="input-group">
         <div class="input-label">Vishnu Monthly Salary <span class="input-value" id="v-vishnuSalary">AED 40,000</span></div>
         <input type="range" id="vishnuSalary" min="25000" max="70000" step="500" value="40000" oninput="updateVal('vishnuSalary',this.value,'AED ','',true);recalc()">
+        <div class="inr-pill teal"><span class="inr-flag">🇮🇳</span><span class="inr-val" id="inr-vishnuSalary">₹10.20 L/mo</span></div>
       </div>
       <div class="input-group">
         <div class="input-label">Divya Monthly Salary <span class="input-value" id="v-divyaSalary">AED 8,000</span></div>
         <input type="range" id="divyaSalary" min="0" max="25000" step="500" value="8000" oninput="updateVal('divyaSalary',this.value,'AED ','',true);recalc()">
+        <div class="inr-pill teal"><span class="inr-flag">🇮🇳</span><span class="inr-val" id="inr-divyaSalary">₹2.04 L/mo</span></div>
       </div>
       <div class="input-group">
         <div class="input-label">Divya Joins (months after Jan 2027) <span class="input-value" id="v-divyaJoinMonth">Month 3 (Mar 2027)</span></div>
@@ -402,22 +431,27 @@ tbody tr.phase-change { background: rgba(16,212,168,0.04); }
       <div class="input-group">
         <div class="input-label">Rent <span class="input-value red" id="v-rent">AED 5,500</span></div>
         <input type="range" class="red-range" id="rent" min="2000" max="12000" step="100" value="5500" oninput="updateVal('rent',this.value,'AED ','',true);recalc()">
+        <div class="inr-pill red"><span class="inr-flag">🇮🇳</span><span class="inr-val" id="inr-rent">₹1.40 L/mo</span></div>
       </div>
       <div class="input-group">
         <div class="input-label">Food <span class="input-value red" id="v-food">AED 1,500</span></div>
         <input type="range" class="red-range" id="food" min="500" max="4000" step="100" value="1500" oninput="updateVal('food',this.value,'AED ','',true);recalc()">
+        <div class="inr-pill red"><span class="inr-flag">🇮🇳</span><span class="inr-val" id="inr-food">₹38,250/mo</span></div>
       </div>
       <div class="input-group">
         <div class="input-label">Travel <span class="input-value red" id="v-travel">AED 1,000</span></div>
         <input type="range" class="red-range" id="travel" min="200" max="3000" step="100" value="1000" oninput="updateVal('travel',this.value,'AED ','',true);recalc()">
+        <div class="inr-pill red"><span class="inr-flag">🇮🇳</span><span class="inr-val" id="inr-travel">₹25,500/mo</span></div>
       </div>
       <div class="input-group">
         <div class="input-label">Utilities <span class="input-value red" id="v-utilities">AED 1,000</span></div>
         <input type="range" class="red-range" id="utilities" min="200" max="3000" step="100" value="1000" oninput="updateVal('utilities',this.value,'AED ','',true);recalc()">
+        <div class="inr-pill red"><span class="inr-flag">🇮🇳</span><span class="inr-val" id="inr-utilities">₹25,500/mo</span></div>
       </div>
       <div class="input-group">
         <div class="input-label">Miscellaneous <span class="input-value red" id="v-misc">AED 500</span></div>
         <input type="range" class="red-range" id="misc" min="100" max="3000" step="100" value="500" oninput="updateVal('misc',this.value,'AED ','',true);recalc()">
+        <div class="inr-pill red"><span class="inr-flag">🇮🇳</span><span class="inr-val" id="inr-misc">₹12,750/mo</span></div>
       </div>
     </div>
   </div>
@@ -433,24 +467,29 @@ tbody tr.phase-change { background: rgba(16,212,168,0.04); }
       <div class="input-group">
         <div class="input-label">Vishnu PL EMI <span class="input-value gold" id="v-vishnuPL">AED 1,935</span></div>
         <input type="range" class="gold-range" id="vishnuPL" min="0" max="5000" step="50" value="1935" oninput="updateVal('vishnuPL',this.value,'AED ','',true);recalc()">
+        <div class="inr-pill gold"><span class="inr-flag">🇮🇳</span><span class="inr-val" id="inr-vishnuPL">₹49,343/mo</span></div>
       </div>
       <div class="input-group">
         <div class="input-label">Car Loan EMI <span class="input-value gold" id="v-carLoan">AED 658</span></div>
         <input type="range" class="gold-range" id="carLoan" min="0" max="3000" step="50" value="658" oninput="updateVal('carLoan',this.value,'AED ','',true);recalc()">
+        <div class="inr-pill gold"><span class="inr-flag">🇮🇳</span><span class="inr-val" id="inr-carLoan">₹16,779/mo</span></div>
       </div>
       <div class="input-group">
         <div class="input-label">Divya PL EMI <span class="input-value gold" id="v-divyaPL">AED 4,257</span></div>
         <input type="range" class="gold-range" id="divyaPL" min="0" max="8000" step="50" value="4257" oninput="updateVal('divyaPL',this.value,'AED ','',true);recalc()">
+        <div class="inr-pill gold"><span class="inr-flag">🇮🇳</span><span class="inr-val" id="inr-divyaPL">₹1.09 L/mo</span></div>
       </div>
       <div class="section-label">Family Support (AED/mo)</div>
       <div class="input-row">
         <div class="input-group">
           <div class="input-label">Vishnu's <span class="input-value gold" id="v-vFamily">AED 387</span></div>
           <input type="range" class="gold-range" id="vFamily" min="0" max="2000" step="50" value="387" oninput="updateVal('vFamily',this.value,'AED ','',true);recalc()">
+          <div class="inr-pill gold"><span class="inr-flag">🇮🇳</span><span class="inr-val" id="inr-vFamily">₹9,869/mo</span></div>
         </div>
         <div class="input-group">
           <div class="input-label">Divya's <span class="input-value gold" id="v-dFamily">AED 387</span></div>
           <input type="range" class="gold-range" id="dFamily" min="0" max="2000" step="50" value="387" oninput="updateVal('dFamily',this.value,'AED ','',true);recalc()">
+          <div class="inr-pill gold"><span class="inr-flag">🇮🇳</span><span class="inr-val" id="inr-dFamily">₹9,869/mo</span></div>
         </div>
       </div>
       <div class="section-label">Loan End Dates</div>
@@ -472,6 +511,7 @@ tbody tr.phase-change { background: rgba(16,212,168,0.04); }
       <div class="input-group">
         <div class="input-label">Wedding Cost <span class="input-value indigo" id="v-weddingCost">AED 47,000</span></div>
         <input type="range" class="indigo-range" id="weddingCost" min="10000" max="150000" step="1000" value="47000" oninput="updateVal('weddingCost',this.value,'AED ','',true);recalc()">
+        <div class="inr-pill indigo"><span class="inr-flag">🇮🇳</span><span class="inr-val" id="inr-weddingCost">₹11.99 L total</span></div>
       </div>
       <div class="input-group">
         <div class="input-label">Wedding Month (from Jan 2027) <span class="input-value indigo" id="v-weddingMonth">Month 6 (Jun 2027)</span></div>
@@ -480,10 +520,12 @@ tbody tr.phase-change { background: rgba(16,212,168,0.04); }
       <div class="input-group">
         <div class="input-label">Emergency Fund Target <span class="input-value indigo" id="v-emergencyFund">AED 23,500</span></div>
         <input type="range" class="indigo-range" id="emergencyFund" min="5000" max="100000" step="500" value="23500" oninput="updateVal('emergencyFund',this.value,'AED ','',true);recalc()">
+        <div class="inr-pill indigo"><span class="inr-flag">🇮🇳</span><span class="inr-val" id="inr-emergencyFund">₹5.99 L total</span></div>
       </div>
       <div class="input-group">
         <div class="input-label">Savings Goal (₹1Cr equiv.) <span class="input-value teal" id="v-savingsGoal">AED 3,90,000</span></div>
         <input type="range" id="savingsGoal" min="100000" max="800000" step="10000" value="390000" oninput="updateVal('savingsGoal',this.value,'AED ','',true);recalc()">
+        <div class="inr-pill teal"><span class="inr-flag">🇮🇳</span><span class="inr-val" id="inr-savingsGoal">₹99.45 L total</span></div>
       </div>
     </div>
   </div>
@@ -1341,10 +1383,53 @@ function togglePanel(header) {
   header.querySelector('.panel-icon').textContent = body.classList.contains('collapsed') ? '▸' : '▾';
 }
 
+// Sliders that show AED values and need an INR pill
+const AED_SLIDER_IDS = [
+  'vishnuSalary','divyaSalary',
+  'rent','food','travel','utilities','misc',
+  'vishnuPL','carLoan','divyaPL','vFamily','dFamily',
+  'weddingCost','emergencyFund','savingsGoal'
+];
+
+// Labels for each slider type (shown in INR pill)
+const AED_SLIDER_SUFFIX = {
+  vishnuSalary:'/mo', divyaSalary:'/mo',
+  rent:'/mo', food:'/mo', travel:'/mo', utilities:'/mo', misc:'/mo',
+  vishnuPL:'/mo', carLoan:'/mo', divyaPL:'/mo',
+  vFamily:'/mo', dFamily:'/mo',
+  weddingCost:' total', emergencyFund:' total', savingsGoal:' total'
+};
+
+function getRate() { return parseFloat(document.getElementById('aedToInr').value); }
+
+function inrFormat(aed) {
+  const inr = aed * getRate();
+  if (inr >= 10000000) return '₹' + (inr/10000000).toFixed(2) + ' Cr';
+  if (inr >= 100000)   return '₹' + (inr/100000).toFixed(2) + ' L';
+  if (inr >= 1000)     return '₹' + Math.round(inr).toLocaleString('en-IN');
+  return '₹' + Math.round(inr);
+}
+
+function updateInrPill(id, aedVal) {
+  const el = document.getElementById('inr-' + id);
+  if (!el) return;
+  const suffix = AED_SLIDER_SUFFIX[id] || '';
+  el.textContent = inrFormat(aedVal) + suffix;
+}
+
+function refreshAllInrPills() {
+  AED_SLIDER_IDS.forEach(id => {
+    const slider = document.getElementById(id);
+    if (slider) updateInrPill(id, parseFloat(slider.value));
+  });
+}
+
 function updateVal(id, val, prefix='', suffix='', commify=false) {
   const n = parseFloat(val);
   const formatted = commify ? Math.round(n).toLocaleString('en-IN') : val;
   document.getElementById('v-' + id).textContent = prefix + formatted + suffix;
+  // Update INR pill if this is an AED slider
+  if (AED_SLIDER_IDS.includes(id)) updateInrPill(id, n);
 }
 
 function updateJoinMonth(val) {
@@ -1370,6 +1455,7 @@ function updateWeddingMonth(val) {
 
 function updateAEDRate(val) {
   document.getElementById('v-aedToInr').textContent = '₹' + parseFloat(val).toFixed(2) + ' / AED';
+  refreshAllInrPills(); // re-render all pills when rate changes
 }
 
 function switchTab(tab, name) {
@@ -1381,6 +1467,7 @@ function switchTab(tab, name) {
 
 // Init
 recalc();
+refreshAllInrPills();
 </script>
 </body>
 </html>
